@@ -1,6 +1,6 @@
 // CardCheck.cpp - Anna Myers - November 8, 2026
-// Description: Part 1: Checks an 8 digit credit card number, read in as an integer
-// Part 2: checks a 16-digit credit card number read as a string
+// Description: Part 1: Checks an 8 digit credit card number, read in as an integer.
+// Part 2: checks a 16-digit credit card number read as a string.
 
 #include <iostream>
 using namespace std;
