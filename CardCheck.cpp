@@ -4,7 +4,7 @@
 #include <iostream>
 using namespace std;
 
-// Function prototype
+// Function prototype.
 bool isCardValid(int digits[], int size);
 
 int main(void) {
