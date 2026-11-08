@@ -1,34 +1,45 @@
 // CardCheck.cpp - Anna Myers - November 8, 2026
 // Description: Part 1: Checks an 8 digit credit card number, read in as an integer
+// Part 2: checks a 16-digit credit card number read as a string
 
 #include <iostream>
 using namespace std;
 
 // Function prototype.
 bool isCardValid(int digits[], int size);
+bool isNumeric(string s);
+bool isCorrectLength(string s);
 
 int main(void) {
-	const int SIZE = 8;
-	int number;
+	const int SIZE = 16;
+	string input;
 
-	cout << "Enter 8-digit credit card # or Q to quit: ";
-	// Typing Q makes int read fail
-	while (cin >> number) {
-		int digits[SIZE];
-		// remove digits from the right
-		for (int i = SIZE - 1; i >= 0; i--) {
-			digits[i] = number % 10;
-			number /= 10;
+	cout << "Enter 16-digit credit card # or Q to quit: ";
+	cin >> input;
+	while (input != "Q" && input != "q") {
+		// Digits are check first
+		if (!isNumeric(input)) {
+			cout << "Error - card numbr must contain only digits." << endl;
 		}
-
-		if (isCardValid(digits, SIZE)) {
-			cout << "Card is valid." << endl;
+		else if (!isCorrectLength(input)) {
+			cout << "Error - card number must contain 16 digits." << endl;
 		}
 		else {
-			cout << "Card is not valid." << endl;
+			int digits[SIZE];
+			for (int i = 0; i < SIZE; i++) {
+				// convert char to its digit value
+				digits[i] = input[i] - '0';
+			}
+			if (isCardValid(digits, SIZE)) {
+				cout << "Card is valid." << endl;
+			}
+			else {
+				cout << "Card is not valid." << endl;
+			}
 		}
-		cout << "Enter 8-digit credit card # or Q to quit: ";
-
+		cout << endl;
+		cout << "Enter 16-digit credit card # or Q to quit: ";
+		cin >> input;
 	}
 	return 0;
 }
@@ -53,4 +64,19 @@ bool isCardValid(int digits[], int size) {
 		}
 	}
 	return total % 10 == 0;
+}
+
+// Returns true if every character is 0 through 9
+bool isNumeric(string s) {
+	for (int i = 0; i < (int)s.length(); i++) {
+		if (s[i] < '0' || s[i] > '9') {
+			return false;
+		}
+	}
+	return true;
+}
+
+// Returns true if the string has exactly 16 char
+bool isCorrectLength(string s) {
+	return s.length() == 16;
 }
